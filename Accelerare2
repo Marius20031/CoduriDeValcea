@@ -486,8 +486,8 @@ public class Accelerare2 extends LinearOpMode {
         if (gamepad1.right_trigger != 0) {
             TrightDrive.setPower(-(power - FranaD));
             BrightDrive.setPower(-(power - FranaD));
-            TrightDrive.setPower(-power);
-            BrightDrive.setPower(-power);
+            TlefttDrive.setPower(-power);
+            BleftDrive.setPower(-power);
         }
 
     }
@@ -505,8 +505,8 @@ public class Accelerare2 extends LinearOpMode {
         if (gamepad1.right_trigger != 0) {
             TrightDrive.setPower(power - FranaD);
             BrightDrive.setPower(power - FranaD);
-            TrightDrive.setPower(power);
-            BrightDrive.setPower(power);
+            TleftDrive.setPower(power);
+            BleftDrive.setPower(power);
         }
     }
 }
