@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -27,16 +28,19 @@ public class ValceaTeleOp extends LinearOpMode {
     private  CRServo Parcare = null;
     double  power   = 1;
     double mersbine=0;
-    int ok=1;
     double FranaS,FranaD;
     public Servo ServomotorE = null;
     public Servo ServomotorV = null;
+    DigitalChannel digitalTouch;  // Hardware Device Object
 
     @Override
     public void runOpMode() {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+        digitalTouch = hardwareMap.get(DigitalChannel.class, "sensor_digital");
 
+        // set the digital channel to input.
+        digitalTouch.setMode(DigitalChannel.Mode.INPUT);
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
@@ -70,18 +74,22 @@ public class ValceaTeleOp extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            FranaD=gamepad1.right_trigger;
-            FranaS=gamepad1.left_trigger;
-
-
-            if(ok==1) {
-                ServomotorE.setPosition(0.2);
-                ServomotorV.setPosition(0.2);
-                ok=0;
+            if (digitalTouch.getState() == true) {
+                telemetry.addData("Digital Touch", "Is Not Pressed");
+            } else {
+                telemetry.addData("Digital Touch", "Is Pressed");
             }
+            telemetry.update();
             while(mersbine==0)
-            {    if(gamepad2.dpad_down)
-                Mascota.setPosition(1);
+            {
+                if (digitalTouch.getState() == true) {
+                    telemetry.addData("Digital Touch", "Is Not Pressed");
+                } else {
+                    telemetry.addData("Digital Touch", "Is Pressed");
+                }
+                telemetry.update();
+                if(gamepad2.dpad_down)
+                    Mascota.setPosition(1);
                 if(gamepad2.dpad_up)
                     Mascota.setPosition(-1);
                 if(gamepad2.a)
@@ -114,8 +122,6 @@ public class ValceaTeleOp extends LinearOpMode {
 
                     if (gamepad1.left_trigger == 0)
                         power = 1;
-                    if (gamepad1.right_trigger == 0)
-                        power = 1;
                     if (!gamepad1.dpad_up) {
                         TleftDrive.setPower(0);
                         BleftDrive.setPower(0);
@@ -136,8 +142,6 @@ public class ValceaTeleOp extends LinearOpMode {
                     CurbaSpate(power,FranaD,FranaS);
 
                     if (gamepad1.left_trigger == 0)
-                        power = 1;
-                    if (gamepad1.right_trigger == 0)
                         power = 1;
                     if (!gamepad1.dpad_down) {
                         TleftDrive.setPower(0);
@@ -249,8 +253,16 @@ public class ValceaTeleOp extends LinearOpMode {
                         break;
                     }
                 }
-                if(gamepad1.start) { ColectorE.setPower(0);ColectorV.setPower(0);sleep(100);mersbine=1;}
+                if (digitalTouch.getState() != true) {
+                    ColectorE.setPower(0);ColectorV.setPower(0);sleep(100);mersbine=1;}
+                //if(gamepad1.start) { ColectorE.setPower(0);ColectorV.setPower(0);sleep(100);mersbine=1;}
             }
+            if (digitalTouch.getState() == true) {
+                telemetry.addData("Digital Touch", "Is Not Pressed");
+            } else {
+                telemetry.addData("Digital Touch", "Is Pressed");
+            }
+            telemetry.update();
             while(gamepad2.dpad_left)
             {Parcare.setPower(1);
                 if(!(gamepad2.dpad_down))
@@ -303,10 +315,8 @@ public class ValceaTeleOp extends LinearOpMode {
                 BrightDrive.setPower(power);
 
                 CurbaSpate(power,FranaD,FranaS);
-
+                
                 if (gamepad1.left_trigger == 0)
-                    power = 1;
-                if (gamepad1.right_trigger == 0)
                     power = 1;
                 if (!gamepad1.dpad_down) {
                     TleftDrive.setPower(0);
@@ -419,11 +429,14 @@ public class ValceaTeleOp extends LinearOpMode {
                 }
             }
         }
-        telemetry.addData("pozitie", ServoRight.getPosition());
-        telemetry.addData("pozitie", ServoLeft.getPosition());
+        if (digitalTouch.getState() == true) {
+            telemetry.addData("Digital Touch", "Is Not Pressed");
+        } else {
+            telemetry.addData("Digital Touch", "Is Pressed");
+        }
         telemetry.update();
-    }
 
+    }
     public void CurbaFata(double power,double FranaD,double FranaS){
         FranaD=gamepad1.right_trigger;
         FranaS=gamepad1.left_trigger;
