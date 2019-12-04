@@ -218,7 +218,7 @@ public class ValceaAlbastruCaramidaGyro extends LinearOpMode {
         ColectorE.setPower(-0.7);
         ColectorV.setPower(-0.7);
         sleep(500);
-        t=7;
+        t=12;
         while((t-angles.firstAngle)<3.75)
         {
             MotorSF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
