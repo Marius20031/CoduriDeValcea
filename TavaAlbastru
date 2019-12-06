@@ -178,22 +178,8 @@ public class TavaAlbastru extends LinearOpMode {
         ServomotorE.setPosition(0.2);
         ServomotorV.setPosition(0.2);
         sleep(500);
-
-        Laterala1Stanga(0.3,250);
-        while (opModeIsActive() && !isStopRequested() && MotorSF.isBusy() && MotorSJ.isBusy() && MotorDF.isBusy() && MotorDJ.isBusy()) {
-            angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
-            telemetry.addData("Heading: ", angles.firstAngle);
-            telemetry.addData("Roll: ", angles.secondAngle);
-            telemetry.addData("Pitch", angles.thirdAngle);
-            telemetry.update();
-        }
-        MotorSF.setPower(0);
-        MotorSJ.setPower(0);
-        MotorDF.setPower(0);
-        MotorDJ.setPower(0);
-        sleep(500);
-
-        Inainte(0.3,2400);
+        
+        Inainte(0.3,2650);
         while (opModeIsActive() && !isStopRequested() && MotorSF.isBusy() && MotorSJ.isBusy() && MotorDF.isBusy() && MotorDJ.isBusy()) {
             angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("Heading: ", angles.firstAngle);
