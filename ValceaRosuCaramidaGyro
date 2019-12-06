@@ -135,7 +135,7 @@ public class ValceaRosuCaramidaGyro extends LinearOpMode {
         telemetry.update();
         ColectorE.setPower(0.3);
         ColectorV.setPower(0.3);
-        Laterala(0.5,-2560);
+        Laterala(0.5,-2460);
         while (opModeIsActive() && !isStopRequested() && MotorSF.isBusy() && MotorSJ.isBusy() && MotorDF.isBusy() && MotorDJ.isBusy()) {
             angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("Heading: ", angles.firstAngle);
@@ -171,7 +171,7 @@ public class ValceaRosuCaramidaGyro extends LinearOpMode {
         ColectorE.setPower(0);
         ColectorV.setPower(0);
         //a fost -1150
-        Laterala(0.5,850);
+        Laterala(0.5,950);
         while (opModeIsActive() && !isStopRequested() && MotorSF.isBusy() && MotorSJ.isBusy() && MotorDF.isBusy() && MotorDJ.isBusy()) {
             angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
             telemetry.addData("Heading: ", angles.firstAngle);
@@ -198,29 +198,8 @@ public class ValceaRosuCaramidaGyro extends LinearOpMode {
         MotorSJ.setPower(0);
         MotorDF.setPower(0);
         MotorDJ.setPower(0);
-        target=55;
-        while((target-angles.firstAngle)>3.75)
-        {
-            MotorSF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            MotorSJ.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            MotorDF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-            MotorDJ.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
-
-            MotorDF.setPower(-TurnPower);
-            MotorDJ.setPower(-TurnPower);
-            MotorSF.setPower(TurnPower);
-            MotorSJ.setPower(TurnPower);
-            telemetry.addData(" zacc:",angles.firstAngle);
-            telemetry.addData(" target", target);
-            telemetry.update();
-        }
-        sleep(500);
-        ColectorE.setPower(-0.7);
-        ColectorV.setPower(-0.7);
-        sleep(500);
-        t=33;
-        while((t-angles.firstAngle)<3.75)
+        target=-35;
+        while((target-angles.firstAngle)<3.75)
         {
             MotorSF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             MotorSJ.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -232,6 +211,28 @@ public class ValceaRosuCaramidaGyro extends LinearOpMode {
             MotorDJ.setPower(TurnPower);
             MotorSF.setPower(-TurnPower);
             MotorSJ.setPower(-TurnPower);
+            telemetry.addData(" zacc:",angles.firstAngle);
+            telemetry.addData(" target", target);
+            telemetry.update();
+        }
+        sleep(500);
+        ColectorE.setPower(-0.7);
+        ColectorV.setPower(-0.7);
+        sleep(500);
+        //90
+        t=-20;
+        while((t-angles.firstAngle)>3.75)
+        {
+            MotorSF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            MotorSJ.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            MotorDF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            MotorDJ.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+
+            MotorDF.setPower(-TurnPower);
+            MotorDJ.setPower(-TurnPower);
+            MotorSF.setPower(TurnPower);
+            MotorSJ.setPower(TurnPower);
             telemetry.addData("zacc2:",angles.firstAngle);
             telemetry.addData("t2", t);
             telemetry.update();
