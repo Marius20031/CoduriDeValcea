@@ -18,8 +18,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.Position;
 import org.firstinspires.ftc.robotcore.external.navigation.Velocity;
 import java.util.Locale;
 
-@Autonomous(name= "ValceaAlbastruCaramidaGyro2",group = "Sensor")
-public class ValceaAlbastruCaramidaGyro2 extends LinearOpMode {
+@Autonomous(name= "ValceaAlbastruCaramidaGyro",group = "Sensor")
+public class ValceaAlbastruCaramidaGyro extends LinearOpMode {
 
     public DcMotor MotorDF = null;
     public DcMotor MotorSF = null;
