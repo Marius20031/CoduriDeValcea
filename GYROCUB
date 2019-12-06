@@ -218,7 +218,7 @@ public class ValceaAlbastruCaramidaGyro extends LinearOpMode {
         ColectorE.setPower(-0.7);
         ColectorV.setPower(-0.7);
         sleep(500);
-        t=12;
+        t=33;
         while((t-angles.firstAngle)<3.75)
         {
             MotorSF.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -231,11 +231,11 @@ public class ValceaAlbastruCaramidaGyro extends LinearOpMode {
             MotorDJ.setPower(TurnPower);
             MotorSF.setPower(-TurnPower);
             MotorSJ.setPower(-TurnPower);
-            telemetry.addData(" zacc:",angles.firstAngle);
-            telemetry.addData(" t", t);
+            telemetry.addData("zacc2:",angles.firstAngle);
+            telemetry.addData("t2", t);
             telemetry.update();
         }
-        sleep(300);
+        sleep(200);
         /*Rotire(0.3,1250);
         while (opModeIsActive() && !isStopRequested() && MotorSF.isBusy() && MotorSJ.isBusy() && MotorDF.isBusy() && MotorDJ.isBusy()) {
             angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
