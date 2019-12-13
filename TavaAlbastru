@@ -76,10 +76,8 @@ public class TavaAlbastru extends LinearOpMode {
         imu.initialize(parameters);
         //am identificat gyroul integrat printre componentele robotului
 
-
         telemetry.addData("Mode", "Waiting");
         telemetry.update();
-        //am actuaizat datele din telemetrie
 
         waitForStart();
         telemetry.addData("Mode", "running");
@@ -178,7 +176,8 @@ public class TavaAlbastru extends LinearOpMode {
         ServomotorE.setPosition(0.2);
         ServomotorV.setPosition(0.2);
         sleep(500);
-        
+
+
         Inainte(0.3,2650);
         while (opModeIsActive() && !isStopRequested() && MotorSF.isBusy() && MotorSJ.isBusy() && MotorDF.isBusy() && MotorDJ.isBusy()) {
             angles = imu.getAngularOrientation(AxesReference.INTRINSIC, AxesOrder.ZYX, AngleUnit.DEGREES);
